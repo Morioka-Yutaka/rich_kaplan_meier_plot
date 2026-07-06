@@ -15,15 +15,11 @@ This plot is useful when comparing survival patterns across treatment groups, es
 ---
  
 ## `%rich_kaplan_meier_plot()` macro <a name="richkaplanmeierplot-macro-1"></a> ######
-
-Program:     rich_kaplan_meier_plot.txt  
- Macro:       %rich_kaplan_meier_plot  
-   
- Purpose:     This macro generates a rich Kaplan-Meier survival plot using PROC LIFETEST in SAS.  
+ ### Purpose:     This macro generates a rich Kaplan-Meier survival plot using PROC LIFETEST in SAS.  
               It produces survival curves by group, displays censoring marks, event marks,  
               number-at-risk bands, and number-at-risk tables in a split-panel layout.  
   
- Interpretation Note:  
+ ### Interpretation Note:  
    - The number-at-risk band is not a probability density, frequency distribution,  
      or Raincloud-style density display.  
    - The number-at-risk band represents the risk set within each group, standardized  
@@ -31,7 +27,8 @@ Program:     rich_kaplan_meier_plot.txt
    - The band is shown at time points where the risk set changes due to an event  
      or censoring, and is intended only as a visual summary of the changing risk set.  
  
- Parameters:  
+### Parameters:  
+ ~~~text
    data=                  Input dataset name (default: dummy_adtte)  
    wh=                    WHERE condition to subset data (optional)  
    groupn=                Numeric group variable used for stratification (e.g., TRTPN)  
@@ -45,14 +42,16 @@ Program:     rich_kaplan_meier_plot.txt
    YLABEL=                Label for the Y-axis (e.g., "Probability of Survival")  
    AxisValues=            Tick marks for the X-axis (e.g., "0 1 2 3 4 5")  
    Generate_Code=         Option to output MFILE-generated SAS code (Y/N)  
-   
- Notes:  
+ ~~~
+
+ ### Notes:  
    - This macro is designed for a maximum of 4 strata.  
    - The numeric group variable should use values 1 to 4 for proper label assignment.  
    - The HTML output file is generated in the WORK directory as `RichKM.html`.  
    - When Generate_Code=Y, the MPRINT-generated SAS code is exported to the WORK directory.  
    
- Example usage:  
+ ### Example usage:  
+ ~~~sas
    %rich_kaplan_meier_plot(  
        data = dummy_adtte,  
        wh = %nrbquote(TRTPN in (1: 2)),  
@@ -67,7 +66,14 @@ Program:     rich_kaplan_meier_plot.txt
        YLABEL = %nrbquote(Probability of Survival),  
        AxisValues = %nrbquote(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15),  
        Generate_Code = Y  
-   );  
+   );
+~~~
+<img width="514" height="390" alt="image" src="https://github.com/user-attachments/assets/ee5fa3d2-6251-4fef-8ae5-6306b799e4f7" />  
+
+In the generated HTML file, hovering the cursor over the event and censoring rug plots in the lower panels displays a tooltip showing which subject experienced an event or censoring, and at what time it occurred.  
+<img width="356" height="194" alt="image" src="https://github.com/user-attachments/assets/d7a2cf77-fa64-4796-8e3d-bdee82c682c3" />
+
+
 
  Author:     Yutaka Morioka  
  First Release Date:        2026-07-06  
