@@ -218,8 +218,8 @@ run;
 data Productlimitestimates_1;
 set Productlimitestimates(rename=(STRATUM=_STRATUM));
 where ^missing(&idvar.);
-if Censor ^= &Censor_val. then Event_time=&Time_var.;
-if Censor = &Censor_val. then Cens_time=&Time_var.;
+if Censor = 0 then Event_time=&Time_var.;
+if Censor = 1 then Cens_time=&Time_var.;
 STRATUM=cats(_STRATUM);
 keep STRATUM &idvar. Event_time Cens_time;
 run;
@@ -548,3 +548,4 @@ ods html close;
 
 
 %mend;
+
