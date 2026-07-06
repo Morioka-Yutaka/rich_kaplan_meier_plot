@@ -10,12 +10,12 @@
   
 - Package: rich_kaplan_meier_plot
 - Version: 0.1.0
-- Generated: 2026-07-06T17:22:11
+- Generated: 2026-07-06T18:41:01
 - Author(s): Yutaka Morioka(sasyupi@gmail.com)
 - Maintainer(s): Yutaka Morioka(sasyupi@gmail.com)
 - License: MIT
-- File SHA256: `F*5B3EB4A423EC56F20ADB8F5B5E1955A73BD62CEB91C64355DB32D7AE52D88B82` for this version
-- Content SHA256: `C*E415AAEE4D94EFC706F86F2AD25070672344D817C495D6995955363E7827E223` for this version
+- File SHA256: `F*748FF67CE78698D8B7D2C25D789DA4978C2C918BB19600DE7D4EAE6345483091` for this version
+- Content SHA256: `C*BFA5E0F93620F884F67F324FFBF635CC622371867D600C9887AFFD743D77AD7B` for this version
   
 ---
  
