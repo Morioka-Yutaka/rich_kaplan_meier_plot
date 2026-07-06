@@ -73,6 +73,98 @@ This plot is useful when comparing survival patterns across treatment groups, es
 In the generated HTML file, hovering the cursor over the event and censoring rug plots in the lower panels displays a tooltip showing which subject experienced an event or censoring, and at what time it occurred.  
 <img width="356" height="194" alt="image" src="https://github.com/user-attachments/assets/d7a2cf77-fa64-4796-8e3d-bdee82c682c3" />
 
+   
+When Generate_Code=Y, the SAS code that actually generates the plot can be exported as plain code.
+<img width="590" height="536" alt="image" src="https://github.com/user-attachments/assets/06a6d644-dd74-4ad5-82e1-9b45a9018f7f" />
+
+ ~~~sas
+   %rich_kaplan_meier_plot(  
+       data = dummy_adtte,  
+       wh = %nrbquote(TRTPN = 1),  
+       groupn = TRTPN,  
+       groupc = TRTP,  
+       idvar = USUBJID,  
+       Time_var = AVAL,  
+       Censor_var = CNSR,  
+       Censor_val = 1,  
+       Title = %nrbquote(Rich Kaplan-Meier Plot),  
+       XLABEL = %nrbquote(Survival Time (Month)),  
+       YLABEL = %nrbquote(Probability of Survival),  
+       AxisValues = %nrbquote(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15),  
+       Generate_Code = Y  
+   );
+~~~
+<img width="542" height="415" alt="image" src="https://github.com/user-attachments/assets/a625a49d-a7a4-438d-9213-88d2e47bcf2a" />   
+
+ ~~~sas
+   %rich_kaplan_meier_plot(  
+       data = dummy_adtte,  
+       wh = %nrbquote(TRTPN in (1: 3)),  
+       groupn = TRTPN,  
+       groupc = TRTP,  
+       idvar = USUBJID,  
+       Time_var = AVAL,  
+       Censor_var = CNSR,  
+       Censor_val = 1,  
+       Title = %nrbquote(Rich Kaplan-Meier Plot),  
+       XLABEL = %nrbquote(Survival Time (Month)),  
+       YLABEL = %nrbquote(Probability of Survival),  
+       AxisValues = %nrbquote(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15),  
+       Generate_Code = Y  
+   );
+~~~
+<img width="537" height="410" alt="image" src="https://github.com/user-attachments/assets/0c808030-e629-4ce8-84a6-008e2ef799b7" />  
+
+ ~~~sas
+   %rich_kaplan_meier_plot(  
+       data = dummy_adtte,  
+       wh = %nrbquote(TRTPN in (1: 4)),  
+       groupn = TRTPN,  
+       groupc = TRTP,  
+       idvar = USUBJID,  
+       Time_var = AVAL,  
+       Censor_var = CNSR,  
+       Censor_val = 1,  
+       Title = %nrbquote(Rich Kaplan-Meier Plot),  
+       XLABEL = %nrbquote(Survival Time (Month)),  
+       YLABEL = %nrbquote(Probability of Survival),  
+       AxisValues = %nrbquote(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15),  
+       Generate_Code = Y  
+   );
+~~~
+<img width="548" height="398" alt="image" src="https://github.com/user-attachments/assets/dec8f1ea-aeed-428e-9668-6c4e54765203" />
+
+~~~sas
+data bmt1;
+set sashelp.bmt;
+select (Group);
+  when("ALL") GROUPN = 1;
+  when("AML-Low Risk") GROUPN = 2;
+  when("AML-High Risk") GROUPN = 3;
+end;
+id =cats(_N_);
+run;
+
+%rich_kaplan_meier_plot(
+data = bmt1 ,
+wh =,  
+groupn = GROUPN ,
+groupc = GROUP ,
+idvar=id,
+Time_var = T ,
+Censor_var = Status ,
+Censor_val = 0 ,
+Title = %nrbquote(Rich Kaplan-Meier Plot),
+XLABEL =%nrbquote( Survival Time (Month)),
+YLABEL =%nrbquote( Probability of Survival),
+AxisValues =%nrbquote (0 500 1000 1500 2000 2500 3000),
+Generate_Code =Y
+);
+
+~~~
+
+<img width="551" height="412" alt="image" src="https://github.com/user-attachments/assets/527d5db6-9ad6-4bae-8ea3-0560fc71ffe0" />
+
 
 
  Author:     Yutaka Morioka  
